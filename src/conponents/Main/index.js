@@ -3,9 +3,6 @@ import {View, Button,Text,Image, TouchableOpacity} from "react-native";
 import styles from "./style";
 
 
-
-
-
 export default function Title(){
     return(
         <View style={{marginTop:600}}> 

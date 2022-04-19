@@ -1,32 +1,30 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import {View, Button,Text,Image, useState,TouchableOpacity, TextInput, StatusBar} from "react-native";
+import styles from "../styles_global"
 
-const image = { uri: "https://reactjs.org/logo-og.png" };
+export default function Entrar(){
 
-const Teste = () => (
-  <View style={styles.container}>
-    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      <Text style={styles.text}>Inside</Text>
-    </ImageBackground>
+return(
+  <View style={styles.quadro}>
+    <View style={{marginTop:20}}>
+      <Text style={styles.Text}>Òtimo dia!</Text>
+      <Text style={{fontSize:17, marginLeft:17, color:'#4E5056'}}>Para entrar, digite seus dados abaixo</Text>
+    </View>
+    <View style={styles.container}> 
+      <TextInput style={styles.textInput} placeholder="   Email" onChangeText={text=>setEmail(text)}/>
+      <TextInput style={styles.textInput} placeholder="   Senha"/>
+      <TouchableOpacity>
+        <Text style={styles.button}>Entrar</Text>
+      </TouchableOpacity>
+      <Text style={{color:'#3DD39F', fontSize:17, marginBottom:20}}>Esqueceu a senha ?</Text>
+      <Text>-----------------       Ou        ---------------</Text>
+      <TouchableOpacity>
+        <Text style={styles.button2}>Entrar</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text style={styles.button2}>Entrar</Text>
+      </TouchableOpacity>
+    </View>
   </View>
-);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  image: {
-    flex: 1,
-    justifyContent: "center"
-  },
-  text: {
-    color: "white",
-    fontSize: 42,
-    lineHeight: 84,
-    fontWeight: "bold",
-    textAlign: "center",
-    backgroundColor: "#000000c0"
-  }
-});
-
-export default App;
+  )
+} 
