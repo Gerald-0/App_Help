@@ -10,8 +10,6 @@ import { TextInputMask } from "react-native-masked-text";
 export default function Title(){
     const navigation = useNavigation();
     
-
-
     return(
         <View style={style.container}> 
             <Animatable.Image

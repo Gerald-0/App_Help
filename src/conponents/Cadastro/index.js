@@ -1,15 +1,33 @@
 import React from "react";
-import {View, Button,Text,Image, TouchableOpacity, TextInput, StatusBar} from "react-native";
+import {View, Button,Text,Image, TouchableOpacity, TextInput, StatusBar, Alert} from "react-native";
 import styles from "./style"
 import * as Animatable from 'react-native-animatable';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from "react";
 
+import * as Yup from 'yup';
+
 export default function Entrar(){
 
   const navigation = useNavigation();
-  const [emaii, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+
+
+  async function handleSendForm(){
+   try{
+    const schema = Yup.object().shape({
+      email: Yup.string().required("Preencha o seu e-mail"),
+      senha: Yup.string().required("Preencha a sua senha"),
+    })
+    await schema.validate({email, senha})
+  }catch(error){
+    if(error instanceof Yup.ValidationError){
+      Alert.alert(error.message)
+    }
+  }
+  }
+
 
 return(
   <View style={{backgroundColor:"#FDA060", marginTop:0}}>
@@ -23,7 +41,7 @@ return(
         < TextInput
           style={styles.textInput}
           onChangeText={text => setEmail(text) }
-          value={emaii}
+          value={email}
           placeholder="   Email"
         />
 
@@ -37,7 +55,7 @@ return(
         />
 
         <TouchableOpacity>
-          <Text style={styles.button} onPress={ () => navigation.navigate('Registro')} >Entrar</Text>
+          <Text style={styles.button} onPress={handleSendForm} >Entrar</Text>
         </TouchableOpacity>
 
         <TouchableOpacity>
@@ -45,12 +63,13 @@ return(
         </TouchableOpacity>
 
         <Text style={{fontSize:17, marginLeft:17, color:'#4E5056', marginBottom:20}}>Nao tem conta ? se cadastre </Text>
-        <TouchableOpacity>
 
+        <TouchableOpacity>
           <Text style={styles.button} onPress={ () => navigation.navigate('Registro')} >Cadastrar</Text>
         </TouchableOpacity>
+        
       </View>
     </Animatable.View>
   </View>
   )
-} 
+}

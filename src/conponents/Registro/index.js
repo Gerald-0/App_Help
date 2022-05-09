@@ -1,20 +1,81 @@
 import React from "react";
-import { View, Button, Text,Image,TouchableOpacity , TextInput, ScrollView} from "react-native";
+import { View, Button, Text,Image,TouchableOpacity , TextInput, ScrollView, Alert} from "react-native";
 import style from "./style.js";
 import * as Animatable from 'react-native-animatable';
 import { useNavigation } from '@react-navigation/native';
 import { TextInputMask } from "react-native-masked-text";
 import { useState } from "react";
+import usuarioService from '../../Services/UsuarioService';
+import * as Yup from 'yup';
 
 export default function Title(){
     const navigation = useNavigation();
     const [cell, setCell] = useState('');
-    const [emaii, setEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [nome, setNome] = useState('');
     const [cpf, setCpf] = useState('');
     const [data_nascimento, setDataNascimento] = useState('');
     const [chassi, setChassi] = useState('');
     const [senha, setSenha] = useState('');
+    const [endereco, setEndereco] = useState('');
+    const [numero, setNumero] = useState('');
+    const [bairro, setBairro] = useState('');
+    const [cidade, setCidade] = useState('');
+    const [estado, setEstado] = useState('');
+
+    async function handleSendForm(){
+        try{
+         const schema = Yup.object().shape({
+           email: Yup.string().required("Preencha seu E-mail"),
+           senha: Yup.string().required("Preencha sua Senha"),
+           cell: Yup.string().required("Preencha sua Celular"),
+           nome: Yup.string().required("Preencha seu Nome"),
+           cpf: Yup.string().required("Preencha seu CPF"),
+           data_nascimento: Yup.string().required("Preencha seu Data de Nascimento"),
+           chassi: Yup.string().required("Preencha seu Chassi"),
+           endereco: Yup.string().required("Preencha seu endereco"),
+         })
+         await schema.validate({email, senha, cell, nome, cpf, data_nascimento, chassi, endereco})
+         salvar()
+       }catch(error){
+         if(error instanceof Yup.ValidationError){
+           Alert.alert(error.message)
+         }
+       }
+       }
+
+       const salvar = () => {
+           Alert.alert("chegou no salvar")
+        if (handleSendForm()){
+        //   setLoading(true)
+          
+          let data = {
+            nome: nome,
+            cpf: cpf,
+            data_nascimento: data_nascimento,
+            email: email,
+            senha: senha,
+            chassi: chassi,
+            endereco: endereco,
+            numero: numero,
+            bairro: bairro,
+            cidade: cidade,
+            estado: estado,        
+          }
+          
+          usuarioService.cadastrar(data)
+          .then((response) => {
+            setLoading(false)
+            Alert.alert(response.data.mensagem)
+            setTitulo(null)
+            setDescricao(null)
+          })
+          .catch((error) => {
+            setLoading(false)
+            Alert.alert("Erro", "Houve um erro inesperado")
+          })
+        }
+      }
 
     return(
     
@@ -55,9 +116,8 @@ export default function Title(){
                     <TextInput
                         style={style.textInput}
                         onChangeText={text => setEmail(text) }
-                        value={emaii}
+                        value={email}
                         placeholder="   Email"
-                        keyboardType="email-address"
                     />
                     <TextInput
                         style={style.textInput}
@@ -65,10 +125,8 @@ export default function Title(){
                         value={senha}
                         type={"password"}
                         placeholder="   Senha"
-                        keyboardType="password"
                         secureTextEntry={true}
                     />
-
                     <TextInputMask
                         style={style.textInput}
                         type={'cel-phone'}
@@ -82,49 +140,43 @@ export default function Title(){
                         onChangeText={ text => setCell(text) }
                     />
 
+                    
                     <TextInput
                         style={style.textInput}
-                        onChangeText={Number}
-                        value={{}}
-                        placeholder="   CEP"
-                       
-                    />
-                    <TextInput
-                        style={style.textInput}
-                        onChangeText={{}}
                         value={{}}
                         placeholder="   Endereço"
+                        onChangeText={text => setEndereco(text)}
                        
                     />
                     <TextInput
                         style={style.textInput}
-                        onChangeText={Number}
+                        onChangeText={Number => setNumero(Number)}
                         value={{}}
                         placeholder="   Numero"
                        
                     />
                     <TextInput
                         style={style.textInput}
-                        onChangeText={{}}
+                        onChangeText={text => setBairro(text)}
                         value={{}}
                         placeholder="   Bairro"
                     />
                     <TextInput
                         style={style.textInput}
-                        onChangeText={String}
+                        onChangeText={text => setCidade(text)}
                         value={{}}
                         placeholder="   Cidade"
                     />
                     <TextInput
                         style={style.textInput}
-                        onChangeText={{}}
+                        onChangeText={text => setEstado(text)}
                         value={{}}
                         placeholder="   Estado"
                     />
                 </ScrollView>
                 <View>
                     <TouchableOpacity>
-                        <Text style={style.button} onPress={ () => navigation.navigate('Servico')} >Entrar</Text>
+                        <Text style={style.button} onPress={salvar} >Entrar</Text>
                     </TouchableOpacity>
                 </View>
             </Animatable.View>

@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
         fontSize:40,
         fontWeight:'bold',
         marginLeft:15,
+        lineHeight:38,
+        textAlign:"center",
     },
     textInput: {
         width:350,

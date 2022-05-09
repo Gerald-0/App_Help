@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
         fontSize:40,
         fontWeight:'bold',
         marginLeft:15,
-    }
-})
+    },
+   
+});
 
 export default styles

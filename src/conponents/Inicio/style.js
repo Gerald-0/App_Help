@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         marginLeft:15,
         marginTop:10,
+        lineHeight:38,
     },
     textInput: {
         width:350,

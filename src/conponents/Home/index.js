@@ -12,30 +12,22 @@ export default function Title(){
 
     return(
         <View style={style.container}> 
-
-        
-
             <View style={style.containerLogo}>
                 <Animatable.Image
                     animation="flipInY"
-                    delay={600}
-                    source={require('../../../assets/Img/logo.png')}
+                    delay={700}
+                    source={require('../../../assets/Img/fundo.png')}
                     style={{ width:'100%'}}
                     resizeMode="contain"
                 />
             </View>
-
             <Animatable.View  animation="fadeInUp" style={style.containerForm}>
-            
-
                 <TouchableOpacity
-                style={style.button}
-                onPress={ () => navigation.navigate('Cadastro')}
-                >
-                    <Text>Entrar</Text>
+                    style={style.button}
+                    onPress={ () => navigation.navigate('Cadastro')}>
+                    <Text style={style.Text}>Entrar</Text>
                 </TouchableOpacity>
             </Animatable.View>
-
         </View>
         
     )
