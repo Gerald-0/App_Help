@@ -5,7 +5,7 @@ import Config from "./Config"
 class CadastroUsuario{
     async cadastrar(data){
         return axios({
-            url: Config.API_URL + "api/Usuario",
+            url: Config.API_URL + "Usuario/",
             method: "POST",
             timeout: Config.TIMEOUT_REQUEST,
             data: data,

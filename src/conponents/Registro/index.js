@@ -26,14 +26,14 @@ export default function Title(){
     async function handleSendForm(){
         try{
          const schema = Yup.object().shape({
-           email: Yup.string().required("Preencha seu E-mail"),
-           senha: Yup.string().required("Preencha sua Senha"),
-           cell: Yup.string().required("Preencha sua Celular"),
-           nome: Yup.string().required("Preencha seu Nome"),
-           cpf: Yup.string().required("Preencha seu CPF"),
-           data_nascimento: Yup.string().required("Preencha seu Data de Nascimento"),
-           chassi: Yup.string().required("Preencha seu Chassi"),
-           endereco: Yup.string().required("Preencha seu endereco"),
+        //    email: Yup.string().required("Preencha seu E-mail"),
+        //    senha: Yup.string().required("Preencha sua Senha"),
+        //    cell: Yup.string().required("Preencha sua Celular"),
+        //    nome: Yup.string().required("Preencha seu Nome"),
+        //    cpf: Yup.string().required("Preencha seu CPF"),
+        //    data_nascimento: Yup.string().required("Preencha seu Data de Nascimento"),
+        //    chassi: Yup.string().required("Preencha seu Chassi"),
+        //    endereco: Yup.string().required("Preencha seu endereco"),
          })
          await schema.validate({email, senha, cell, nome, cpf, data_nascimento, chassi, endereco})
          salvar()
@@ -45,7 +45,7 @@ export default function Title(){
        }
 
        const salvar = () => {
-           Alert.alert("chegou no salvar")
+           
         if (handleSendForm()){
         //   setLoading(true)
           
@@ -66,7 +66,7 @@ export default function Title(){
           usuarioService.cadastrar(data)
           .then((response) => {
             setLoading(false)
-            Alert.alert(response.data.mensagem)
+            //Alert.alert(response.data.mensagem)
             setTitulo(null)
             setDescricao(null)
           })
@@ -176,7 +176,7 @@ export default function Title(){
                 </ScrollView>
                 <View>
                     <TouchableOpacity>
-                        <Text style={style.button} onPress={salvar} >Entrar</Text>
+                        <Text style={style.button} onPress={salvar} >Cadastrar</Text>
                     </TouchableOpacity>
                 </View>
             </Animatable.View>

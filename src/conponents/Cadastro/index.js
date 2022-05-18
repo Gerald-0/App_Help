@@ -26,7 +26,7 @@ export default function Entrar(){
       Alert.alert(error.message)
     }
   }
-  }
+}
 
 
 return(

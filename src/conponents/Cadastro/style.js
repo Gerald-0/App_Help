@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     quadro: {
         width:400,
         height:800,
-        marginTop:350,
+        marginTop:330,
         backgroundColor:'#FFF',
         borderRadius:30,
     },

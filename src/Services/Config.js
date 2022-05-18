@@ -5,5 +5,6 @@ const Config = {
     HEADER_REQUEST: {
         Accept: 'application/json'
     }
+    
 }
 export default Config;
